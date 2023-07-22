@@ -33,9 +33,9 @@ jobs:
         run: meltano install
       - name: Render app to image
         env:
+          FFMPEG_SOURCE_URL: "rtsp://zephyr.rtsp.stream/pattern?streamKey=${{secrets.RTSP_STREAM_KEY}}"
           TAP_PIXLET_MAGNIFICATION: "8"
         run: |
-          export FFMPEG_SOURCE_URL="rtsp://zephyr.rtsp.stream/pattern?streamKey=${RTSP_STREAM_KEY}"
           meltano run webp
           mv output/**/*.webp output/image.webp
       - name: Store image
