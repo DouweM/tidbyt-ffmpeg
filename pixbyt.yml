@@ -1,0 +1,17 @@
+jobs:
+- name: ffmpeg
+  tasks:
+  - tap-pixlet--ffmpeg target-tidbyt
+- name: ffmpeg--webp
+  tasks:
+  - tap-pixlet--ffmpeg target-webp
+
+plugins:
+  extractors:
+  - name: tap-pixlet--ffmpeg
+    inherit_from: tap-pixlet
+    pip_url: git+https://github.com/DouweM/tap-pixlet.git -r apps/ffmpeg/requirements.txt
+    config:
+      path: apps/ffmpeg
+      app_config:
+        source_url: $FFMPEG_SOURCE_URL
